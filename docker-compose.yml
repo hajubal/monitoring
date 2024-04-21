@@ -10,6 +10,9 @@ services:
     volumes:
       - ./prometheus:/etc/prometheus
       - prom_data:/prometheus
+    networks:
+      - coin-network
+
   grafana:
     image: grafana/grafana
     container_name: grafana
@@ -21,5 +24,12 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=grafana
     volumes:
       - ./grafana:/etc/grafana/provisioning/datasources
+    networks:
+      - coin-network
+
 volumes:
   prom_data:
+
+networks:
+  coin-network:
+    external: true
