@@ -14,7 +14,7 @@ services:
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:3000/api/health
     ports:
-      - 3340:3000
+      - "3340:3000"
     volumes:
       - /volume1/docker/grafana/data:/var/lib/grafana:rw
     environment:
