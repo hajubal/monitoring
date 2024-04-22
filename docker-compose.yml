@@ -2,20 +2,22 @@ services:
   prometheus:
     image: prom/prometheus:v2.51.2
     container_name: prometheus
+    user: "1026:100"
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - 9090:9090
     restart: unless-stopped
     volumes:
-      - ./prometheus:/etc/prometheus
-      - prom_data:/prometheus
+      - ./prometheus:/etc/prometheus:uid=1026,gid=100
+      - prom_data:/prometheus:uid=1026,gid=100
     networks:
       - coin-network
 
   grafana:
     image: grafana/grafana
     container_name: grafana
+    user: "1026:100"
     ports:
       - 3000:3000
     restart: unless-stopped
@@ -23,7 +25,7 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=grafana
     volumes:
-      - ./grafana:/etc/grafana/provisioning/datasources
+      - ./grafana:/etc/grafana/provisioning/datasources:uid=1026,gid=100
     networks:
       - coin-network
 
