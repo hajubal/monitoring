@@ -19,7 +19,7 @@ services:
     container_name: grafana
     user: 1026:100
     ports:
-      - 7071:3000
+      - 3000:3000
     restart: unless-stopped
     environment:
       - GF_SECURITY_ADMIN_USER=admin
